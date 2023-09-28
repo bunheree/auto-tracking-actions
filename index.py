@@ -65,19 +65,48 @@ def randomClick():
 
 def keyPressAuto():
     while(True):
-        nameId = NSWorkspace.sharedWorkspace().activeApplication()['NSApplicationProcessIdentifier']
-        if(nameId == 95629 or nameId == 810): # Only press if the id of the app is Word or Visual code apps
+        if(getAppId() == 95629 or getAppId() == 810): # Only press if the id of the app is Word or Visual code apps
             press()
-        
 
+def getAppId():
+    return NSWorkspace.sharedWorkspace().activeApplication()['NSApplicationProcessIdentifier'] 
+
+def customActions():
+    while(True):
+        # START: Press right only for 2 apps 95629, 810
+        while(True):
+            if(getAppId() == 95629 or getAppId() == 810):
+                press()
+            else:
+                break      
+        # END.
+
+        # START: Random click
+        while(True):
+            if(getAppId() == 95629 or getAppId() == 810):
+                break
+            else:
+                # Random position
+                x, y = random.randrange(100, 1500), random.randrange(100, 1000)
+                
+                # move mouse to that position
+                pyautogui.moveTo(x, y)
+                # click
+                pyautogui.click()
+                # time delay for action
+                randomTime = random.randrange(60,120)
+                time.sleep(randomTime)
+        # END: Random click
+
+        time.sleep(1)
 
 def init():
     # --- This line for check current position --
     # print(pyautogui.position())
     # time.sleep(2)
 
-    #keyPressAuto()
-    randomClick()
+    # randomClick()
+    customActions()
 
     
 init()
