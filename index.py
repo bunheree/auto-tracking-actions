@@ -71,11 +71,14 @@ def keyPressAuto():
 def getAppId():
     return NSWorkspace.sharedWorkspace().activeApplication()['NSApplicationProcessIdentifier'] 
 
+def getAppName():
+    return NSWorkspace.sharedWorkspace().activeApplication()['NSApplicationName']
+
 def customActions():
     while(True):
         # START: Press right only for 2 apps 95629, 810
         while(True):
-            if(getAppId() == 95629 or getAppId() == 810):
+            if(getAppName() == 'Code' or getAppName() == 'PhpStorm'):
                 press()
             else:
                 break      
@@ -83,7 +86,7 @@ def customActions():
 
         # START: Random click
         while(True):
-            if(getAppId() == 95629 or getAppId() == 810):
+            if(getAppName() == 'Code' or getAppName() == 'PhpStorm'):
                 break
             else:
                 # Random position
